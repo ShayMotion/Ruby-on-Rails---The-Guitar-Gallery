@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'auction/title'
+  get 'auction/start_date'
+  get 'auction/end_date'
   post "/api/v1/login", to: "api/v1/sessions#create"
   post "/api/v1/signup", to: "api/v1/users#create"
   delete "/api/v1/logout", to: "api/v1/sessions#destroy"
