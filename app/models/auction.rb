@@ -6,6 +6,7 @@ class Auction < ApplicationRecord
     has_many :guitars
     has_many :brands, through: :guitars
     has_many :models
+    has_many :locations
 
     validates :name, :user, presence: true 
 end
