@@ -1,0 +1,45 @@
+<h1>Add a Guitar to an Auction</h1>
+
+<%= form_for [@auction,@guitars] do |f| %>
+    
+
+    <%= f.label :brand %>
+    <%= f.text_field :brand %>
+    
+    <%= f.label :model %>
+    <%= f.text_field :model %>
+
+    <%= f.label :year %>
+    <%= f.text_field :year %>
+
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+   
+    <br></br>
+    <if @auction %>
+    <p> Auction: <%= @auction.title </p>
+    <%= f.hidden_field :auction_id %>
+    <% else %>
+    <%= f.label :auction_id, "Select an Auction:" %>
+    <%= f.collection_select :auction_id, Auction.all, :id, :title,
+    include_blank: true %>
+
+    <Or Create a New Auction:</h3>
+
+    <%= f.fields_for :auction do |a| %>
+        <%= a.label :title %>
+        <%= a.text_field :title %>
+        <%= a.date_field :start_date %>
+        <%= a.date_field :end_date %>
+        <br></br>
+
+
+    <%= a.hidden_field :user_id, value: current_user.id %>
+    <br></br>
+
+        <% end %>
+        <% end %>
+
+    <%= f.submit%>
+
+    <% end %>  

@@ -1,0 +1,22 @@
+<h1>Add an Auction</h1>
+
+<%= form_for @auction do |f| %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+
+    <%= f.label :end_date %>
+    <%= f.date_field :end_date %>
+
+    <%= f.label :auction_id %>
+    <%= f.collection_select %>
+
+    <%= a.hidden_field :user_id, value: ccurrent_user.id %>
+    <br></br>
+
+    <%= f.submit%>
+
+    <% end %>
