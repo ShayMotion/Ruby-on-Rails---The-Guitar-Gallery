@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-    
+    skip_before_action :redirect_if_not_logged_in
+
     def index
     end
 
@@ -17,6 +18,7 @@ class SessionsController < ApplicationController
             flash[:message] = "Sorry, please try again"
             redirect_to login_path
     end
+    
 
     def destroy
         session.clear
@@ -24,9 +26,8 @@ class SessionsController < ApplicationController
     end
 
 
-end
-
-end
+    end
+end 
 
 
 

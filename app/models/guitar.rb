@@ -6,9 +6,13 @@ class Guitar < ApplicationRecord
     has_many :prices
     belongs_to :locations
 
-    scope :by_auction. -> (auction_id){where('auction_id= ?', auction_id}
+    scope :by_auction. -> (auction_id) {where("auction_id= ?", auction_id)}
 
-    accepts_nested_attributes_for :auction
+
+        validates :auction_id, presence: true
+        validates_associated :auction
+
+    # accepts_nested_attributes_for :auction
 
     def guitar_attributes=(guitar_params)
         Guitar.find_or_create_by(guitar_params)
@@ -16,6 +20,4 @@ class Guitar < ApplicationRecord
         self.guitar = guitar
         end 
     end
-
-     
  end

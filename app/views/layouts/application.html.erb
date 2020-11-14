@@ -1,12 +1,28 @@
-<!DOCTUPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>The Guitar Gallery</title>
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
 
-<% link_to 'Logout', '/logout', method: :delete %>
-
-<%= yield %> 
+<% if logged_in? %>
+<nav class='navbar'>
+  <%= link_to 'Logout', '/logout', method: :delete, class:'button'%>
+  <%= link_to 'Add an Auction', new_auction_path , class:'button'%>
+  <%= link_to 'All Auctions', auctions_path, class:'button' %>
+  <%= link_to 'Add a Guitar', new_guitar_path, class:'button' %>
+  <%= link_to 'My Guitars', guitars_path, class:'button' %>
+</nav>
+<% else %>
+  <%= link_to 'Log In', login_path %>
+<% end %>
+<div class='container'>
+<%= yield %>
+</div>
 </body>
 </html>

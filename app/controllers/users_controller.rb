@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
-
+  skip_before_action :redirect_if_not_logged_in, only: [:new, :create]
+  
   # GET /users
 
   def new
@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    if @user.valid?
     if @user.save
       session[:user_id] = @user.id
       redirect_to user_path(@user)
@@ -22,9 +23,23 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
+  def index
+    @users = User.all
+  end
 
+  # def message
+  #   @receiver = User.find_by(id: params[:id])
+  #   @sender = current_user
+  #   @message = params[:content]
+
+  #   NotificationMailer.training_invite(@receiver, @sender, @message).deliver_now
+
+  #   redirect_to users_path
+  # end
+    
     private
 
+    
     def user_params
       params.require(:user).permit(:username, :email, :password)
     end

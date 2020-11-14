@@ -1,5 +1,12 @@
 <h1>Welcome To The Guitar Gallery</h1>
 
+<% if !logged_in? %>
 <% link_to "Log in", "/login" %>
 
 <% link_to "Sign Up", signup_path %>
+
+<% else %>
+
+  <h2>Welcome <%= current_user.username%> </h2>
+
+<% end %>

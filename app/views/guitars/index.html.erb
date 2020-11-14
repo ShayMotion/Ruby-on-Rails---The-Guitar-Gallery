@@ -1,0 +1,20 @@
+<h1>All Guitars</h1>
+
+<ul>
+<% @guitars.each do |guitar | %>
+    <li>
+    <strong><%= guitar.title %></strong> - 
+    <%=guitar.brand %> 
+    <%=guitar.model %> 
+    <%=guitar.year %>
+    <%=guitar.price %>
+    <%= f.hidden_field :guitar_id %>
+
+    added by: <%= guitar.user.username %>
+    <%= link_to "See all auctions", guitar_auctions_path(guitar)%>
+    <%= link_to "Add a guitar", new_guitar_auction_path(guitar)%>
+    </li>
+    
+
+    <% end %>
+    </ul>
