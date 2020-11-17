@@ -3,7 +3,7 @@ class GuitarsController < ApplicationController
   def index
     if params[:auction_id] && auction = Auction.find_by_id(params[:auction_id])
     @guitars = auction.guitars
-    @guitars = current_user.trainings.where(auction_id: params[:auction_id])
+    # @guitars = current_user.guitars.by_auction(auction_id: params[:auction_id])
   end
 
   def show
@@ -12,10 +12,21 @@ class GuitarsController < ApplicationController
 
 
   def new
+    if params[:auction_id] && auction = Auction.find_by_id(params[:auction_id])
+      
+      @guitar = auction.guitars.build 
+  else
     @guitar = Guitar.new 
+    @guitar.build_auction
   end
 
   def create 
+    if params[:auction_id] && auction = Auction.find_by_id(params[:auction_id])
+
+    else 
+      
+    end
+
     @guitar = Guitar.new(guitar_params)
     if @guitar.save
     redirect_to guitar_path(@guitar)

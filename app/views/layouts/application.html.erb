@@ -2,11 +2,8 @@
 <html>
 <head>
 <title>The Guitar Gallery</title>
-<%= csrf_meta_tags %>
-<%= csp_meta_tag %>
 
-<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
 </head>
 <body>
 
@@ -19,7 +16,9 @@
   <%= link_to 'My Guitars', guitars_path, class:'button' %>
 </nav>
 <% else %>
-  <%= link_to 'Log In', login_path %>
+<%= link_to 'Sign Up', signup_path %>
+<%= link_to 'Log In', login_path %>
+
 <% end %>
 <div class='container'>
 <%= yield %>

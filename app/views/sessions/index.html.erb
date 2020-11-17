@@ -1,9 +1,12 @@
+<center>
 <h1>Welcome To The Guitar Gallery</h1>
-
+<h3>Buy & Sell Rare Guitars</h3><center>
 <% if !logged_in? %>
-<% link_to "Log in", "/login" %>
+<%= link_to 'All Auctions', "/auction", class:'button' %>
+<%= link_to 'All Guitars', "/auction", class:'button' %>
+<%= link_to 'Add a Guitar', "/auction", class:'button' %>
+<%= link_to 'Add an Auction', "/auction", class:'button' %>
 
-<% link_to "Sign Up", signup_path %>
 
 <% else %>
 
