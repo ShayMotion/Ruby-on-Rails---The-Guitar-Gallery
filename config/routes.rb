@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   post "/guitar" => "guitars#create"
   delete "/guitar" => "guitars#destroy"
 
+  get "/users" => "users#new"
+  post "/users" => "users#create"
+  delete "/users" => "users#destroy"
+      resources :users
       resources :auctions do 
       resources :guitars 
       end

@@ -25,21 +25,9 @@ def index
   @users = User.all
 end
 
-def message
-  @receiver = User.find_by(id: params[:id])
-  @sender = current_user
-  @message = params[:content]
-
-  #send an email
-  NotificationMailer.training_invite(@receiver, @sender, @message).deliver_now
-
-  redirect_to users_path
-end
-
 private
 
 def user_params
   params.require(:user).permit(:username, :email, :password)
 end
 end
-  
