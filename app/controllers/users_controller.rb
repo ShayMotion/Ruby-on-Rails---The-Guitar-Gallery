@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  skip_before_action :redirect_if_not_logged_in, only: [:new, :create]
+  skip_before_action  only: [:new, :create]
 
 def new
-  @user = User.new
 end
 
 def create
@@ -13,7 +12,7 @@ def create
     session[:user_id] = @user.id
     redirect_to user_path(@user)
   else
-    render :new
+    render 'users/new'
   end
 end
 
@@ -23,6 +22,24 @@ end
 
 def index
   @users = User.all
+end
+
+def update
+  @user.update(user_params)
+  if @user.save
+    session[:user_id] = @user.id
+    redirect_to user_path(@user)
+  else
+    #error message
+    render 'users/#{@user.id}/edit'
+  end
+end
+
+def destroy
+  @user.destroy
+  session.delete :user_id
+  @current_user = nil
+  redirect_to root_path
 end
 
 private

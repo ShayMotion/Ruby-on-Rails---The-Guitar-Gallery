@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>The Guitar Gallery</title>
 
+<head>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1"
 
 </head>
 <body>
 
+<header class="container">
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+<div class="navbar-header">
 <% if logged_in? %>
 <nav class='navbar'>
   <%= link_to 'Logout', '/logout', method: :delete, class:'button'%>
   <%= link_to 'Add an Auction', new_auction_path , class:'button'%>
   <%= link_to 'All Auctions', auctions_path, class:'button' %>
   <%= link_to 'Add a Guitar', new_guitar_path, class:'button' %>
-  <%= link_to 'My Guitars', guitars_path, class:'button' %>
+  <%= link_to 'All Guitars', guitars_path, class:'button' %>
 </nav>
 <% else %>
 <%= link_to 'Sign Up', signup_path %>

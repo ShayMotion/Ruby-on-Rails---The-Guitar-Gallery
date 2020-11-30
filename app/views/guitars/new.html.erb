@@ -1,7 +1,8 @@
+<div class="title-container">
 <h1>Add a Guitar to an Auction</h1>
-
+</div>
 <%= render partial: "layouts/errors", locals: { object: @guitar } %>
-<%= render partial: "layouts/errors", locals: { object: @guitar.auction } %>
+<%= render partial: "layouts/errors", locals: { object: @guitar.auction  } %>
 
 <%= form_for [@auction,@guitars] do |f| %>
     
