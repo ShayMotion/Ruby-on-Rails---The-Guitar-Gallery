@@ -4,4 +4,3 @@ class User < ApplicationRecord
     has_many :auctions
     validates :username, uniqueness: true
     end
-end

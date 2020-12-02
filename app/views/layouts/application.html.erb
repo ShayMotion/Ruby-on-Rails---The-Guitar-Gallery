@@ -20,8 +20,8 @@
 <% if logged_in? %>
 <nav class='navbar'>
   <%= link_to 'Logout', '/logout', method: :delete, class:'button'%>
-  <%= link_to 'Add an Auction', new_auction_path , class:'button'%>
-  <%= link_to 'All Auctions', auctions_path, class:'button' %>
+  <%= link_to 'Add an Auction', new_user_auction_path(current_user) , class:'button'%>
+  <%= link_to 'All Auctions', user_auctions_path(current_user), class:'button' %>
   <%= link_to 'Add a Guitar', new_guitar_path, class:'button' %>
   <%= link_to 'All Guitars', guitars_path, class:'button' %>
 </nav>

@@ -1,6 +1,5 @@
 class AuctionsController < ApplicationController
 
-
 def index
   if params[:auction_id]
     auction = Auction.find_by_id(params[:auction_id])
@@ -19,23 +18,22 @@ def new
 end
 
 def create
-  @auction = current_user.
-  created_auctions.build(
-    auction_params)
+  @auction = Auction.new(auction_params)
     if @auction.save
-    redirect_to auction_path(@auction)
+    redirect_to user_auctions_path(@user)
     else
-      render :new 
+      redirect_to new_user_visit_url
+  end
 end
 
 private 
 
 def auction_params
-  params.require(:workout).permit(:title, :start_date, :end_date)
+  params.require(:auction).permit(:title, :start_date, :end_date)
     end
 
-  end
 end
+
 
 
 
