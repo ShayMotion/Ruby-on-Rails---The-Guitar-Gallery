@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_024333) do
+ActiveRecord::Schema.define(version: 2020_11_11_012358) do
 
   create_table "auctions", force: :cascade do |t|
     t.string "title"
     t.string "start_date"
     t.string "end_date"
+    t.integer "location_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -27,6 +28,10 @@ ActiveRecord::Schema.define(version: 2020_12_02_024333) do
   end
 
   create_table "guitars", force: :cascade do |t|
+    t.string "brand"
+    t.string "model"
+    t.string "year"
+    t.string "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "auction_id"
@@ -44,9 +49,11 @@ ActiveRecord::Schema.define(version: 2020_12_02_024333) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "username"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "username"
   end
 
 end

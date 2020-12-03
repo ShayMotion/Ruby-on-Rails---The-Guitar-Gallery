@@ -9,17 +9,17 @@ Rails.application.routes.draw do
   get "/signup" => "users#new"
   post "/signup" => "users#create"
  
-  get "/auction" => "auctions#new"
-  post "/auction" => "auctions#create"
-  delete "/auction" => "auctions#destroy"
+  get "/auctions/new" => "auctions#new", :as => "new_auction"
+  post "/auctions" => "auctions#create"
+  delete "/auctions/:id" => "auctions#destroy"
 
-  get "/guitar" => "guitars#new"
-  post "/guitar" => "guitars#create"
-  delete "/guitar" => "guitars#destroy"
+  get "/guitar/new" => "guitars#new"
+  post "/guitars" => "guitars#create"
+  delete "/guitars/:id" => "guitars#destroy"
 
-  get "/users" => "users#new"
+  get "/users/new" => "users#new"
   post "/users" => "users#create"
-  delete "/users" => "users#destroy"
+  delete "/users/:id" => "users#destroy"
       resources :users
       resources :auctions do 
       resources :guitars 

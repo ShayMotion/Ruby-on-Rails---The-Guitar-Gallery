@@ -1,0 +1,4 @@
+<h1><%= @user.name%>'s Guitar Gallery</h1>
+<% if can? :create, Auction %>
+  <%= link_to "Add an Auction to your gallery", new_user_auction_path(current_user) %>
+<% end %>

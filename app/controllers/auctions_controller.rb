@@ -22,8 +22,13 @@ def create
     if @auction.save
     redirect_to user_auctions_path(@user)
     else
-      redirect_to new_user_visit_url
+      redirect_to new_user_auction_url
   end
+end
+
+def destroy
+  Auction.find_by(id: params[:id]).destroy
+  redirect_to user_auctions_path
 end
 
 private 

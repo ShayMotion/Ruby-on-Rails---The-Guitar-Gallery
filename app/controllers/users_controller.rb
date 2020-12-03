@@ -8,7 +8,6 @@ def create
   @user = User.new(user_params)
   if @user.valid?
     @user.save
-    #send a welcome email
     session[:user_id] = @user.id
     redirect_to user_path(@user)
   else
