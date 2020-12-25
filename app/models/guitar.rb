@@ -4,9 +4,6 @@ class Guitar < ApplicationRecord
     has_many :models
     has_many :years
     has_many :prices
-    belongs_to :locations
-
-    scope :by_auction. -> (auction_id) {where("auction_id= ?", auction_id)}
 
 
         validates :auction_id, presence: true

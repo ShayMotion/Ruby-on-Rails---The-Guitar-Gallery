@@ -1,9 +1,9 @@
-<h1>All Auctions</h1>
+<center><h1>All Auctions</h1>
 
 <ul>
-<% @auctions.each do |auction | %>
+<% @auctions.each do |auction| %>
     <li>
-    <strong><%= auction.title %></strong> - 
+    <strong><%= auction.title %></strong>
     <%=auction.start_date %> 
     <%=auction.end_date %> added by: <%= auction.user.username %>
     <%= link_to "See all auctions"%>
@@ -11,3 +11,4 @@
 
     <% end %>
     </ul>
+

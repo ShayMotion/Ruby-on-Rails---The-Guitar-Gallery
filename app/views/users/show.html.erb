@@ -1,4 +1,19 @@
-<h1><%= @user.name%>'s Guitar Gallery</h1>
-<% if can? :create, Auction %>
-  <%= link_to "Add an Auction to your gallery", new_user_auction_path(current_user) %>
+<center><h1>My Guitar Gallery</h1>
+
+<h2> <%= @user.username%>'s Guitars For Auction</h2>
+
+<%= link_to 'All Auctions', auctions_path, class:'button' %>
+<%= link_to 'All Guitars', guitars_path, class:'button' %>
+<%= link_to 'Add a Guitar', guitars_new_path, class:'button' %>
+<%= link_to 'Add an Auction', auction_new_path, class:'button' %>
+
+
+<% @user.guitars.each do |guitar|%>
+    <li class="h3"><%=link_to guitar.name, guitar_path(guitar) %> </li><br>
+    <ul>
+      <% auction.guitars.each do |guitar|%>
+        <% if @user.guitars.include?(guitar)%>
+        <li>
+        <% end %>
+    <% end %>  
 <% end %>

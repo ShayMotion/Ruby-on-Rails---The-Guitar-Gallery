@@ -1,16 +1,14 @@
 <div class="title-container">
-<h1>All Guitars</h1>
-<%= link_to "New Guitar", new_guitar_path, class "btn btn-default" %>
+<center><h1>All Guitars</h1>
 </div> 
 
 <ul>
-<% @guitars.each do |guitar | %>
+<% @guitar.each do |guitar | %>
     <li>
-    <strong><%= guitar.title %></strong> - 
-    <%=guitar.brand %> 
-    <%=guitar.model %> 
-    <%=guitar.year %>
-    <%=guitar.price %>
+    <%= @guitar.brand %> 
+    <%= @guitar.model %> 
+    <%= @guitar.year %>
+    <%= @guitar.price %>
     <%= f.hidden_field :guitar_id %>
 
     added by: <%= guitar.user.username %>
@@ -18,6 +16,7 @@
     <%= link_to "Add a guitar", new_guitar_auction_path(guitar)%>
     </li>
     
+    <%= render :partial => "guitars/new", :locals => {:guitars => @guitars.brand}%>
 
     <% end %>
     </ul>

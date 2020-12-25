@@ -1,16 +1,15 @@
 class AuctionsController < ApplicationController
-
+  
 def index
-  if params[:auction_id]
-    auction = Auction.find_by_id(params[:auction_id])
-    @guitars = auction.guitars.where(user_id: current_user.id)
-  else
-    @guitars = current_user.guitars
-  end
+ @auctions = Auction.all
 end
 
 def show
-  @auction = Auction.find(params[:id])
+  @auction = Auction.new
+  respond_to do |format|
+    format.html {render :show}
+    format.json {render json: @auction}
+  end
 end
 
 def new
@@ -18,11 +17,12 @@ def new
 end
 
 def create
-  @auction = Auction.new(auction_params)
+  @auction = Auction.create(auction_params)
+  @auctions = Auction.all
     if @auction.save
-    redirect_to user_auctions_path(@user)
+    redirect_to auction_path
     else
-      redirect_to new_user_auction_url
+      render 'auctions/new'
   end
 end
 
@@ -33,8 +33,12 @@ end
 
 private 
 
+def set_user
+  @user = User.find_by(id: params[:user_id])
+end
+
 def auction_params
-  params.require(:auction).permit(:title, :start_date, :end_date)
+  params.require(:auction).permit(:id, :user_id, :guitar_id, :auction_id, :title, :start_date, :end_date, :location)
     end
 
 end

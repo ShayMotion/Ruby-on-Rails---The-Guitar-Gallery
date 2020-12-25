@@ -8,3 +8,4 @@
 
 
 User.create(name: "Shayan", username: "shaymotion", password: "password")
+Auction.create(title: "Joe's Guitars", start_date: "01012020", end_date: "01042020")

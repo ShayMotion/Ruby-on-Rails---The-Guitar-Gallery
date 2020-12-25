@@ -1,10 +1,11 @@
-<div class="title-container">
-<h1>Add a Guitar to an Auction</h1>
-</div>
-<%= render partial: "layouts/errors", locals: { object: @guitar } %>
-<%= render partial: "layouts/errors", locals: { object: @guitar.auction  } %>
 
-<%= form_for [@auction,@guitars] do |f| %>
+<center><h1>Add a Guitar to an Auction</h1>
+
+<%= link_to 'All Auctions', auctions_path, class:'button' %>
+<%= link_to 'All Guitars', guitars_path, class:'button' %>
+<%= link_to 'Add an Auction', auction_new_path, class:'button' %>
+
+<%= form_for @guitar do |f| %>
     
 
     <%= f.label :brand %>
@@ -19,31 +20,22 @@
     <%= f.label :price %>
     <%= f.text_field :price %>
    
-    <br></br>
-    <if @auction %>
-    <p> Auction: <%= @auction.title </p>
+  
+    <% if @auction %>
+    <p> Auction: <%= @auction.title %> </p>
     <%= f.hidden_field :auction_id %>
     <% else %>
     <%= f.label :auction_id, "Select an Auction:" %>
     <%= f.collection_select :auction_id, Auction.all, :id, :title,
     include_blank: true %>
 
-    <Or Create a New Auction:</h3>
+    
+    <% end %>  
 
-    <%= f.fields_for :auction do |a| %>
-        <%= a.label :title %>
-        <%= a.text_field :title %>
-        <%= a.date_field :start_date %>
-        <%= a.date_field :end_date %>
-        <br></br>
-
-
-    <%= a.hidden_field :user_id, value: current_user.id %>
-    <br></br>
-
-        <% end %>
-        <% end %>
+      
+       
 
     <%= f.submit%>
+    
 
     <% end %>  

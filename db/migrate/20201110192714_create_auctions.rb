@@ -5,6 +5,7 @@ class CreateAuctions < ActiveRecord::Migration[6.0]
       t.string :start_date
       t.string :end_date
       t.integer :user_id
+      t.integer :location_id
       
       t.timestamps
     end

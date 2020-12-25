@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_11_012358) do
+ActiveRecord::Schema.define(version: 2020_12_18_184507) do
 
   create_table "auctions", force: :cascade do |t|
     t.string "title"
     t.string "start_date"
     t.string "end_date"
-    t.integer "location_id"
     t.integer "user_id"
+    t.integer "location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "guitar_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_11_11_012358) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "auction_id"
+    t.integer "user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -54,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_11_11_012358) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "email"
   end
 
 end
