@@ -1,12 +1,22 @@
 class GuitarsController < ApplicationController
 
+  def index
+  @guitars = Guitar.all.includes(:auction)
+  respond_to do |format|
+    format.html {render :index}
+    format.json {render json: @guitars}
+  end
+end
+
   def show
     @guitar = Guitar.find_by(id: params[:id])
+    @auctions = Auction.all
   end  
   
   def new
     @guitar = Guitar.new
     @auctions = Auction.all
+ 
   end
   
   def create 

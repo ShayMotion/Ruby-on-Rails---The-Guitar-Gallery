@@ -8,13 +8,4 @@ class Guitar < ApplicationRecord
 
         validates :auction_id, presence: true
         validates_associated :auction
-
-    # accepts_nested_attributes_for :auction
-
-    def guitar_attributes=(guitar_params)
-        Guitar.find_or_create_by(guitar_params)
-        if guitar.valid?
-        self.guitar = guitar
-        end 
-    end
  end
