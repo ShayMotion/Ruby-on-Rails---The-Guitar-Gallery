@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>The Guitar Gallery</title>
+  <title>The Guitar Gallery</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-<head>
-  <%= csrf_meta_tags %>
-
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <meta name="viewport" content="width=device-width, initial-scale=1"
-
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
 
-<header class="container">
-<nav class="navbar navbar-default">
-<div class="container-fluid">
-<div class="navbar-header">
-<% if logged_in? %>
-<nav class='navbar'>
-  <%= link_to 'Logout', '/logout', method: :delete, class:'button'%>
-  <%= link_to 'Add an Auction', new_user_auction_path(current_user) , class:'button'%>
-  <%= link_to 'All Auctions', user_auctions_path(current_user), class:'button' %>
-  <%= link_to 'Add a Guitar', new_guitar_path, class:'button' %>
-  <%= link_to 'All Guitars', guitars_path, class:'button' %>
-</nav>
-<% else %>
-<%= link_to 'Sign Up', signup_path %>
-<%= link_to 'Log In', login_path %>
+  <header class="navbar navbar-expand-lg navbar-light bg-light">
 
-<% end %>
-<div class='container'>
-<%= yield %>
-</div>
+    <a class="navbar-brand" href="/">Guitar Gallery</a>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-nav">
+      <% if logged_in? %>
+        <%= link_to 'Logout', logout_path, class:'nav-item nav-link'%>
+        <%= link_to 'Add an Auction', auctions_new_path , class:'nav-item nav-link'%>
+        <%= link_to 'All Auctions', auctions_path, class:'nav-item nav-link' %>
+        <%= link_to 'Add a Guitar', guitars_new_path(current_user), class:'nav-item nav-link' %>
+        <%= link_to 'All Guitars', guitars_path, class:'nav-item nav-link' %>
+        <%= link_to 'Your Profile', user_path(current_user), class:'nav-item nav-link' %>
+        <%= link_to 'Your Auctions', user_auctions_path(current_user), class:'nav-item nav-link' %>
+        <%= link_to 'Your Guitars', user_guitars_path(current_user), class:'nav-item nav-link' %>
+      <% else %>
+        <%= link_to 'Sign Up', signup_path, class: 'nav-item nav-link' %>
+        <%= link_to 'Log In', login_path, class: 'nav-item nav-link' %>
+      <% end %>
+      </div>
+    </div>
+
+  </header>
+
+  <div class='container text-center'>
+    <div class="row d-flex justify-content-center">
+      <div class="col-6">
+      <%= yield %>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

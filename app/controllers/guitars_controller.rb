@@ -1,46 +1,39 @@
 class GuitarsController < ApplicationController
 
   def index
-  @guitars = Guitar.all.includes(:auction)
-  respond_to do |format|
-    format.html {render :index}
-    format.json {render json: @guitars}
+    @guitars = Guitar.all.includes(:auction)
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @guitars}
+    end
   end
-end
 
   def show
-    @guitar = Guitar.find_by(id: params[:id])
+    @guitar = Guitar.find_by(user_id: params[:user_id], id: params[:id])
     @auctions = Auction.all
   end  
   
   def new
+    redirect_if_not_logged_in
     @guitar = Guitar.new
     @auctions = Auction.all
- 
   end
   
   def create 
     @guitar = Guitar.new(guitar_params)
-    @auction = Auction.new(auction_params)
+    @guitar.user = current_user
     if @guitar.save
-    redirect_to guitars_path(@guitar)
+      redirect_to guitar_path(@guitar.user, @guitar)
     else
       render "guitars/new" 
+    end
   end
-end
 
-def index
-  @guitar = Guitar.all
-  respond_to do |format|
-    format.html {render :index}
-    format.json {render json: @guitars}
+
+  def destroy
+    Guitar.find(params[:id]).destroy
+    redirect_to guitars_path
   end
-end 
-
-def destroy
-  Guitar.find(params[:id]).destroy
-  redirect_to guitars_path
-end
 
   def edit 
     @guitar = Guitar.find_by(id: params[:id])
@@ -55,15 +48,11 @@ end
     end
   end
 
-    def set_guitar
-      @guitar = Guitar.find_by(id: params[:id])
+  def set_guitar
+    @guitar = Guitar.find_by(id: params[:id])
   end
-  
-  def auction_params
-    params.require(:auction).permit(:title, :start_date, :end_date)
-      end
 
   def guitar_params
-    params.require(:guitar).permit(:brand, :model, :year, :price, auction_attributes:[:title, :start_date, :end_date])
+    params.require(:guitar).permit(:brand, :model, :year, :price, :auction_id)
   end
 end

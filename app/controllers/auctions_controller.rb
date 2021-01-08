@@ -5,7 +5,7 @@ def index
 end
 
 def show
-  @auction = Auction.new
+  @auction = Auction.find_by(id: params[:id])
   respond_to do |format|
     format.html {render :show}
     format.json {render json: @auction}
@@ -13,17 +13,19 @@ def show
 end
 
 def new
+  redirect_if_not_logged_in
   @auction = Auction.new
   @guitars = Guitar.all
 end
 
 def create
   @auction = Auction.create(auction_params)
+  @auction.user = current_user
   @guitars = Guitar.all
-    if @auction.save
-    redirect_to auction_path
-    else
-      render 'auctions/new'
+  if @auction.save
+    redirect_to auctions_path
+  else
+    render 'auctions/new'
   end
 end
 
@@ -39,7 +41,7 @@ def set_user
 end
 
 def auction_params
-  params.require(:auction).permit(:id, :user_id, :guitar_id, :auction_id, :title, :start_date, :end_date, :location)
+  params.require(:auction).permit(:user_id,:title, :start_date, :end_date, :location_id)
     end
 
 end

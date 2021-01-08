@@ -1,6 +1,12 @@
 require 'test_helper'
 
-class GuitarControllerTest < ActionDispatch::IntegrationTest
+class GuitarControllerTest <
+  
+  
+  
+  
+  
+  ActionDispatch::IntegrationTest
   test "should get brand" do
     get guitar_brand_url
     assert_response :success

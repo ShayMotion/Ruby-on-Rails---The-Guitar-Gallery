@@ -1,34 +1,38 @@
+<h1>Add an Auction</h1>
 
+<% if @auction.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@auction.errors.count, "error") %> prohibited this auction from being saved:</h2>
 
-<center><h1>Add an Auction</h1>
-
-
-<br></br>
-</div> 
-<center>
-
-<%= link_to 'All Auctions', auctions_path, class:'button' %>
-<%= link_to 'All Guitars', guitars_path, class:'button' %>
-<%= link_to 'Add a Guitar', guitars_new_path, class:'button' %>
-
+    <ul class="list-group">
+    <% @auction.errors.full_messages.each do |message| %>
+        <li class="list-group-item"><%= message %></li>
+    <% end %>
+    </ul>
+</div>
+<% end %>
 
 <%= form_for @auction do |f| %>
-    <%= f.hidden_field :user_id, :user_id => @current_user %>
-    <%= f.label :Location %> <%= f.collection_select :id, Location.all, :id, :city %>
-<div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+
+    <%= f.hidden_field :user_id, :user_id => current_user.id %>
+
+    <div class="form-group">
+        <%= f.label :Location %> <%= f.collection_select :location_id, Location.all, :id, :city, {}, class: "form-control" %>
+    </div> 
+    <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div class="form-group">    
+        <%= f.label :start_date %>
+        <%= f.date_field :start_date, class:"form-control" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :end_date %>
+        <%= f.date_field :end_date, class:"form-control" %>
+    </div>
     
-    <%= f.label :start_date %>
-    <%= f.date_field :start_date %>
+    <br>
 
-    <%= f.label :end_date %>
-    <%= f.date_field :end_date %>
-    
-
-    <br></br>
-
-    <%= f.submit%>
-
-    <% end %>
-
+    <%= f.submit class:"btn btn-primary" %>
+<% end %>

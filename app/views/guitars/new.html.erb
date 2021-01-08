@@ -1,41 +1,45 @@
 
-<center><h1>Add a Guitar to an Auction</h1>
+<h1>Add a Guitar to an Auction</h1>
 
-<%= link_to 'All Auctions', auctions_path, class:'button' %>
-<%= link_to 'All Guitars', guitars_path, class:'button' %>
-<%= link_to 'Add an Auction', auction_new_path, class:'button' %>
+<% if @guitar.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@guitar.errors.count, "error") %> prohibited this guitar from being saved:</h2>
 
-<%= form_for @guitar do |f| %>
+    <ul>
+    <% @guitar.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+    </ul>
+</div>
+<% end %>
+
+<%= form_for [current_user, @guitar] do |f| %>
     
-
-    <%= f.label :brand %>
-    <%= f.text_field :brand %>
+    <div class="form-group">
+        <%= f.label :brand %>
+        <%= f.text_field :brand, class: "form-control" %>
+    </div>
     
-    <%= f.label :model %>
-    <%= f.text_field :model %>
+    <div class="form-group">
+        <%= f.label :model %>
+        <%= f.text_field :model, class: "form-control" %>
+    </div>
 
-    <%= f.label :year %>
-    <%= f.text_field :year %>
+    <div class="form-group">
+        <%= f.label :year %>
+        <%= f.text_field :year, class: "form-control" %>
+    </div>
 
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-   
-  
-    <% if @auction %>
-    <p> Auction: <%= @auction.title %> </p>
-    <%= f.hidden_field :auction_id %>
-    <% else %>
-    <%= f.label :auction_id, "Select an Auction:" %>
-    <%= f.collection_select :auction_id, Auction.all, :id, :title,
-    include_blank: true %>
+    <div class="form-group">
+        <%= f.label :price %>
+        <%= f.text_field :price, class: "form-control" %>
+    </div>
 
-    
-    <% end %>  
+    <div class="form-group">
+        <%= f.label :auction_id, "Select an Auction:" %>
+        <%= f.collection_select :auction_id, @auctions, :id, :title, {}, class: "form-control"  %>
+    </div>
 
-      
-       
+    <%= f.submit class: "btn btn-primary" %>
 
-    <%= f.submit%>
-    
-
-    <% end %>  
+<% end %>

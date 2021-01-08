@@ -1,21 +1,35 @@
 class SessionsController < ApplicationController
-        skip_before_action 
+        #skip_before_action 
 
     def index
     end
 
     def new
-        
     end
 
     def create
-        @user = User.find_by(username: params[:user][:username])
-
-        if @user && @user.authenticate(params[:user][:password])
+        if request.env["omniauth.auth"] # user signed in using third-party
+            @user = User.find_or_create_from_auth_hash(request.env["omniauth.auth"])
             session[:user_id] = @user.id
             redirect_to user_path(@user)
         else
-            redirect_to login_path
+            @user = User.find_by(username: params[:user][:username])
+            
+            if @user.nil?
+                @user = User.new
+                @user.errors.add(:username, "not found")
+            elsif !@user.authenticate(params[:user][:password])
+                @user.errors.add(:password, "is incorrect")
+            end
+
+            if !@user.errors.any?
+                session[:user_id] = @user.id
+                redirect_to user_path(@user)
+            else
+                render "sessions/new"
+            end
+
+        end
     end
     
 
@@ -24,8 +38,6 @@ class SessionsController < ApplicationController
         redirect_to root_path
     end
 
-
-    end
 end 
 
 

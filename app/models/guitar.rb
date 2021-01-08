@@ -1,11 +1,13 @@
 class Guitar < ApplicationRecord
-    belongs_to :auctions
-    has_many :brands, foreign_key: :guitar_id
-    has_many :models
-    has_many :years
-    has_many :prices
+    belongs_to :auction
+    belongs_to :user
 
+    scope :sorted_alphabetically, -> { order(:brand) }
 
-        validates :auction_id, presence: true
-        validates_associated :auction
+    validates :brand, presence: true
+    validates :model, presence: true
+    validates :year, presence: true
+    validates :price, presence: true
+    validates :auction_id, presence: true
+    validates_associated :auction
  end

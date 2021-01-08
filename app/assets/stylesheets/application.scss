@@ -1,5 +1,4 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import "bootstrap/scss/bootstrap";
 
 .title-container {
   display: flex;
@@ -8,6 +7,6 @@
   margin-bottom: 20px;
 }
 
-h1 {
-  margin: 0;
+.field_with_errors {
+  background-color: rgb(247, 143, 143);
 }

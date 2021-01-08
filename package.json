@@ -1,0 +1,17 @@
+{
+  "name": "Rails-Final",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ShayMotion/Rails-Final.git",
+  "author": "Shayan Mohsin <shaymotionfilms@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@rails/webpacker": "5.2.1",
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.1"
+  }
+}

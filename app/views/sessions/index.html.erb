@@ -1,15 +1,8 @@
-<center>
+
 <h1>Welcome To The Guitar Gallery</h1>
-<h3>Buy & Sell Rare Guitars</h3><center>
+<p>Buy & Sell Rare Guitars</p>
 <% if !logged_in? %>
-<%= link_to 'All Auctions', auctions_path, class:'button' %>
-<%= link_to 'All Guitars', guitars_path, class:'button' %>
-<%= link_to 'Add a Guitar', guitars_new_path, class:'button' %>
-<%= link_to 'Add an Auction', auction_new_path, class:'button' %>
-
-
+<h4> Please login to add a guitar.</h4>
 <% else %>
-
-  <h2>Welcome <%= current_user.username%> </h2>
-
-<% end %>
+<h4>You are currently logged in as <%= current_user.username%></h4>
+<%end%>

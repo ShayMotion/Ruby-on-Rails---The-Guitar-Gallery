@@ -1,19 +1,21 @@
-<center><h1>My Guitar Gallery</h1>
-
-<h2> <%= @user.username%>'s Guitars For Auction</h2>
-
-<%= link_to 'All Auctions', auctions_path, class:'button' %>
-<%= link_to 'All Guitars', guitars_path, class:'button' %>
-<%= link_to 'Add a Guitar', guitars_new_path, class:'button' %>
-<%= link_to 'Add an Auction', auction_new_path, class:'button' %>
-
-
-<% @user.guitars.each do |guitar|%>
-    <li class="h3"><%=link_to guitar.name, guitar_path(guitar) %> </li><br>
-    <ul>
-      <% auction.guitars.each do |guitar|%>
-        <% if @user.guitars.include?(guitar)%>
-        <li>
-        <% end %>
-    <% end %>  
-<% end %>
+<h1>My Profile</h1>
+<br>
+<h3>My Guitars</h3>
+<ul class="list-group">
+  <% @user.guitars.each do |guitar| %>
+    <li class="list-group-item">
+      <%=link_to "#{guitar.brand} #{guitar.model}",
+           guitar_path(guitar.user, guitar) %>
+    </li>
+  <% end %>
+</ul>
+<br>
+<h3>My Auctions</h3>
+<ul class="list-group">
+  <% @user.auctions.each do |auction| %>
+    <li class="list-group-item">
+      <%=link_to "#{auction.title}",
+           auction_path(auction) %>
+    </li>
+  <% end %>
+</ul>
