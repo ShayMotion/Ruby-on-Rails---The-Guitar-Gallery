@@ -25,6 +25,7 @@ class GuitarsController < ApplicationController
     if @guitar.save
       redirect_to guitar_path(@guitar.user, @guitar)
     else
+      @auctions = Auction.all # for rendering auction list on new page
       render "guitars/new" 
     end
   end
@@ -47,6 +48,7 @@ class GuitarsController < ApplicationController
       render "guitars/edit"
     end
   end
+
 
   def set_guitar
     @guitar = Guitar.find_by(id: params[:id])

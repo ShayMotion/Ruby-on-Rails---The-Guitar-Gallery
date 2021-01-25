@@ -11,7 +11,9 @@
         </ul>
     </div>
 <% end %>
-
+<% if flash[:error] %>
+<%= flash[:error] %>
+<% end %>
 <br>
 
 <%= form_for :user do |f| %>

@@ -2,10 +2,11 @@ class User < ApplicationRecord
     has_secure_password
     has_many :guitars 
     has_many :auctions
+    has_many :drums
 
     has_many :guitars_through_auctions, through: :auctions, source: :guitars
     has_many :auctions_through_guitars, through: :guitars, source: :auction
-    has_many :locations_through_auctions, through: :auctions, source: :location
+    has_many :locations, through: :auctions
 
     validates :username, uniqueness: true, presence: true
     validates :email, presence: true
