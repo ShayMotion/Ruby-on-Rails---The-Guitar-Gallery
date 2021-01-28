@@ -28,6 +28,12 @@
         <%= link_to 'Your Profile', user_path(current_user), class:'nav-item nav-link' %>
         <%= link_to 'Your Auctions', user_auctions_path(current_user), class:'nav-item nav-link' %>
         <%= link_to 'Your Guitars', user_guitars_path(current_user), class:'nav-item nav-link' %>
+        <%= link_to 'Add a Brass', brasses_new_path(current_user), class:'nav-item nav-link' %>
+        <%= link_to 'All Brass', brasses_path(current_user), class:'nav-item nav-link' %>
+        <%= link_to 'Add DJ', djs_new_path(current_user), class:'nav-item nav-link' %>
+        <%= link_to 'All DJ', djs_path(current_user), class:'nav-item nav-link' %>
+        <%= link_to 'Add Wind', winds_new_path(current_user), class:'nav-item nav-link' %>
+        <%= link_to 'All Wind', winds_path(current_user), class:'nav-item nav-link' %>
       <% else %>
         <%= link_to 'Sign Up', signup_path, class: 'nav-item nav-link' %>
         <%= link_to 'Log In', login_path, class: 'nav-item nav-link' %>

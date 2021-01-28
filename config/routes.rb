@@ -46,6 +46,59 @@ Rails.application.routes.draw do
   post "/users/:user_id/drums" => "drums#create" # nested create
   delete "/users/:user_id/drums/:id" => "drums#destroy" # nested destroy
 
+  get "/auctions/:auction_id/brasses" => "brasses#index"
+  get "/brasses" => "brasses#index" 
+  get "/brasses/new" => "brasses#new"
+  post "/brasses" => "brasses#create"
+
+  get "/users/:user_id/brasses" => "users#brasses", as: "user_brasses" # nested index
+  # get "/users/:user_id/brasses/:id" => "brasses#show", as: "brasses" # nested show
+  post "/users/:user_id/brasses" => "brasses#create" # nested create
+  delete "/users/:user_id/brasses/:id" => "brasses#destroy" # nested destroy
+
+  resource :user do 
+    resource :brass 
+  end
+
+  get "/auctions/:auction_id/djs" => "djs#index"
+  get "/djs" => "djs#index" 
+  get "/djs/new" => "djs#new"
+  post "/djs" => "djs#create"
+
+  get "/users/:user_id/djs" => "users#djs", as: "user_djs" 
+  # get "/users/:user_id/brasses/:id" => "brasses#show", as: "brasses" # nested show
+  post "/users/:user_id/djs" => "djs#create" 
+  delete "/users/:user_id/djs/:id" => "djs#destroy" 
+
+  resource :user do 
+    resource :dj 
+  end
+
+  get "/auctions/:auction_id/winds" => "winds#index"
+  get "/winds" => "winds#index" 
+  get "/winds/new" => "winds#new"
+  post "/winds" => "winds#create"
+
+  get "/users/:user_id/winds" => "users#winds", as: "user_winds" 
+  # get "/users/:user_id/brasses/:id" => "brasses#show", as: "brasses" # nested show
+  post "/users/:user_id/winds" => "winds#create" 
+  delete "/users/:user_id/winds/:id" => "winds#destroy" 
+
+  resource :user do 
+    resource :wind
+  end
+
+  get "/auctions/:auction_id/comments" => "comments#index"
+  get "/comments/new" => "comments#new"
+  post "/comments" => "comments#create"
+
+  get "/users/:user_id/comments" => "users#comments", as: "user_comments" 
+  post "/users/:user_id/comments" => "comments#create" 
+  delete "/users/:user_id/comments/:id" => "comments#destroy" 
+
+  resource :user do 
+    resource :comment
+  end
   # resource :user # "/users/5"
   # resource :drum # "/drums/4"
   # resource :guitar # "/guitars/5"

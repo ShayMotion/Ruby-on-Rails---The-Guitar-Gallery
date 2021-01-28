@@ -8,7 +8,7 @@
         <%= guitar.model %> 
         <%= guitar.year %>
         <%= guitar.price %>
-        added by: <%= guitar.user_id %>
+        added by: <%= guitar.user.username %>
         <%= link_to "Show", guitar_path(guitar.user, guitar) %>
     </li>
 <% end %>

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action  only: [:new, :create]
+  # before_action :set_user
+  # skip_before_action  only: [:new, :create]
 
   def new
   end
@@ -50,6 +51,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find_by(id: params[:user_id])
+  end
 
   def user_params
     params.require(:user).permit(:username, :email, :password)

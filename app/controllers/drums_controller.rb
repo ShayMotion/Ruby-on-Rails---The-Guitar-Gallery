@@ -22,9 +22,7 @@ class DrumsController < ApplicationController
     
     def create 
       @drum = Drum.new(drum_params)
-      # @auction = Auction.find drum_params[:auction_id]
       @drum.user = current_user
-      byebug
       if @drum.save
         redirect_to drum_path(@drum.user, @drum)
       else

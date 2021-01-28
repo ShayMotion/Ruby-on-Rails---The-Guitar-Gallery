@@ -1,0 +1,30 @@
+<h1>Add a Wind to an Auction</h1>
+
+<% if @wind.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@wind.errors.count, "error") %> prohibited this wind from being saved:</h2>
+
+    <ul>
+    <% @wind.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+    </ul>
+</div>
+<% end %>
+
+<%= form_for [current_user, @wind] do |f| %>
+    
+    <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
+    </div>
+    
+
+    <div class="form-group">
+        <%= f.label :auction_id, "Select an Auction:" %>
+        <%= f.collection_select :auction_id, @auctions, :id, :title, {}, class: "form-control"  %>
+    </div>
+
+    <%= f.submit class: "btn btn-primary" %>
+
+<% end %>

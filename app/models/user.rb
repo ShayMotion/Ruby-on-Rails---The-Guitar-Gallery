@@ -3,6 +3,9 @@ class User < ApplicationRecord
     has_many :guitars 
     has_many :auctions
     has_many :drums
+    has_many :brasses
+    has_many :djs
+    has_many :comments
 
     has_many :guitars_through_auctions, through: :auctions, source: :guitars
     has_many :auctions_through_guitars, through: :guitars, source: :auction

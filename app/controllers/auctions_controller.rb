@@ -2,10 +2,13 @@ class AuctionsController < ApplicationController
   
 def index
  @auctions = Auction.all
+ @comments = Comment.all
 end
 
 def show
   @auction = Auction.find_by(id: params[:id])
+  @comments = @auction.comments
+  @comment = Comment.new
   respond_to do |format|
     format.html {render :show}
     format.json {render json: @auction}
@@ -16,12 +19,15 @@ def new
   redirect_if_not_logged_in
   @auction = Auction.new
   @guitars = Guitar.all
+  @locations = Location.all
+  @comments = Comment.all
 end
 
 def create
   @auction = Auction.create(auction_params)
   @auction.user = current_user
   @guitars = Guitar.all
+  @comments = Comment.all
   if @auction.save
     redirect_to auctions_path
   else
@@ -41,7 +47,7 @@ def set_user
 end
 
 def auction_params
-  params.require(:auction).permit(:user_id,:title, :start_date, :end_date, :location_id)
+  params.require(:auction).permit(:user_id, :title, :start_date, :end_date, :location_id)
     end
 
 end

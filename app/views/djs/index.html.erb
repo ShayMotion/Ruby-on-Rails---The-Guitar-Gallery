@@ -1,0 +1,11 @@
+<h1>All DJ Gear</h1>
+
+
+<ul class="list-group">
+<% @djs.each do |dj | %>
+    <li class="list-group-item">
+        <%= dj.title %> 
+
+    </li>
+<% end %>
+</ul>

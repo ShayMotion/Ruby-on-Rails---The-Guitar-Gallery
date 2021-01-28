@@ -4,3 +4,26 @@
 <h4> End Date</h4>
 <p><%= @auction.end_date %></p>
 
+<%= form_for @comment do |f| %>
+    <%= f.hidden_field :auction_id, value: @auction.id %>
+    <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: "form-control" %>
+    </div>
+
+    <%= f.submit class: "btn btn-primary" %>
+
+<% end %>
+
+
+<h1>All Comments</h1>
+
+
+<ul class="list-group">
+<% @comments.each do |comment| %>
+    <li class="list-group-item">
+        <%= comment.description %>
+        Added by: <%= comment.user.username %>  
+    </li>
+<% end %>
+</ul>
