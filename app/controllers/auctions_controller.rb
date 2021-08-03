@@ -2,7 +2,7 @@ class AuctionsController < ApplicationController
   
 def index
  @auctions = Auction.all
- @comments = Comment.all
+#  @comments = Comment.all
 end
 
 def show
@@ -26,8 +26,8 @@ end
 def create
   @auction = Auction.create(auction_params)
   @auction.user = current_user
-  @guitars = Guitar.all
-  @comments = Comment.all
+  # @guitars = Guitar.all
+  # @comments = Comment.all
   if @auction.save
     redirect_to auctions_path
   else

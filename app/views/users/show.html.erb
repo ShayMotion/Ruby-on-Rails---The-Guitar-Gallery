@@ -1,4 +1,9 @@
 <h1>My Profile</h1>
+<h4>You are currently logged in as <%= current_user.username%></h4>
+<%= link_to 'Delete', @user.destroy, user_path %>
+
+
+<br>
 <br>
 <h3>My Guitars</h3>
 <ul class="list-group">

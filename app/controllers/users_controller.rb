@@ -42,6 +42,15 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def delete
+    @user = User.find(params[:id])
+    if current_user?(@user)
+      flash[:error] = "Admin users cannot delete themselves."
+    else
+      @user.destroy
+      flash[:success] = "User deleted."
+    end
+
   def auctions 
     @auctions = current_user.auctions
   end
@@ -59,4 +68,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :email, :password)
   end
+end
 end
